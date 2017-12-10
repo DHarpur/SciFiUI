@@ -5,59 +5,87 @@ import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
+Outline outline = new Outline();
+ArrayList<Planet> planets = new ArrayList<Planet>();
+Menu menu = new Menu();
+Warp[] warp = new Warp[400];
+Minim minim;
 
 void setup()
 {
   minim = new Minim(this);
   fullScreen();
   background(0);
+  smooth();
   initialisePlanets();
   setupWarpStars();
-  setupStars();
+  //setupStars();
   frameRate(120);
 }
-Outline outline = new Outline();
-ArrayList<Planet> planets = new ArrayList<Planet>();
-ArrayList<Star> stars = new ArrayList<Star>();
-Minim minim;
+
+
 boolean played = false;
-Warp[] warp = new Warp[400];
+boolean warped = false;
+int planetNumber = 4;
 float speed = 50;
+int state = 1;
+float screenWidth = displayWidth;
+float screenHeight = displayHeight;
+
 void draw()
 {
   //translate(width/2, height/2);
-  for(int i = 0; i < warp.length; i++)
+  if(!warped)
   {
-    stars.get(i).drawStars();
-    //warp[i].warp();
+    displayStars();
+    (planets.get(planetNumber)).display();
+    if(!played)
+    {
+      (planets.get(planetNumber)).playSound();
+      played = true;
+    }
+    if(state == 1)
+    {
+      menu.displayMenu();
+    }
+    else if(state == 2)
+    {
+      menu.confirm();
+      state = 0;
+    }
   }
-  (planets.get(2)).display();
-  if(!played)
+  else
   {
-    (planets.get(4)).playSound();
-    played = true;
+    if(state == 1)
+    {
+      menu.displayMenu();
+    }
+    else if(state == 2)
+    {
+      menu.confirm();
+      state = 0;
+    }
   }
   outline.render();
-  //noLoop();
 }
 
 void initialisePlanets()
 {
-  PImage vulcanImg = loadImage("Vulcan3.png");
-  AudioPlayer vulcanGreeting = minim.loadFile("spock07.mp3");
-  PImage kronosImg = loadImage("kronos2.png");
-  AudioPlayer klingon = minim.loadFile("identify.wav");
-  PImage romulusImg = loadImage("romulus2.png");
-  AudioPlayer romulan = minim.loadFile("Romulan.mp3");
-  PImage earthImg = loadImage("earth2.png");
-  AudioPlayer english = minim.loadFile("earthFunny.mp3");
-  PImage stationImg = loadImage("spaceStation2.png");
-  AudioPlayer stationAudio = minim.loadFile("DS9AmbientSounds.mp3");
-  Planet vulcan = new Planet(vulcanImg, vulcanGreeting);
-  Planet kronos = new Planet(kronosImg, klingon);
-  Planet romulus = new Planet(romulusImg, romulan);
-  Planet earth = new Planet(earthImg, english);
-  Planet station = new Planet(stationImg, stationAudio);
+  PImage vulcanImg = loadImage("Final_Images/Vulcan3.png");
+  AudioPlayer vulcanGreeting = minim.loadFile("Sound/spock07.mp3");
+  PImage kronosImg = loadImage("Final_Images/kronos2.png");
+  AudioPlayer klingon = minim.loadFile("Sound/identify.wav");
+  PImage romulusImg = loadImage("Final_Images/romulus2.png");
+  AudioPlayer romulan = minim.loadFile("Sound/Romulan.mp3");
+  PImage earthImg = loadImage("Final_Images/earth2.png");
+  AudioPlayer english = minim.loadFile("Sound/earthFunny.mp3");
+  PImage stationImg = loadImage("Final_Images/spaceStation2.png");
+  AudioPlayer stationAudio = minim.loadFile("Sound/DS9AmbientSounds.mp3");
+  Planet vulcan = new Planet(vulcanImg, vulcanGreeting, "Vulcan");
+  Planet kronos = new Planet(kronosImg, klingon, "Kronos");
+  Planet romulus = new Planet(romulusImg, romulan, "Romulus");
+  Planet earth = new Planet(earthImg, english, "Earth");
+  Planet station = new Planet(stationImg, stationAudio, "Deep Space Nine");
   planets.add(vulcan);
   planets.add(kronos);
   planets.add(romulus);
@@ -73,20 +101,21 @@ void setupWarpStars()
   }
 }
 
-void setupStars()
-{
-  for(int i = 0; i < 400; i++)
-  {
-    stars.add(new TwinklingStars());
-  }
-}
-
 void displayStars()
 {
-  
+  color rectColor = color(19, 103, 110);
+  fill(0, 10);
+  stroke(rectColor);
+  rect(1, 1, width-1, height-1);
+  fill(255);
+  noStroke();
+  ellipse(random(0, width), random(0, height), 3, 3); 
 }
 
-//void mousePressed()
-//{
-//  warp.warp();
-//}
+void keyPressed()
+{
+    if(key == 'w')
+    {
+      state = 1;
+    }
+}
