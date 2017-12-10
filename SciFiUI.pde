@@ -26,15 +26,17 @@ void setup()
 
 boolean played = false;
 boolean warped = false;
+boolean changed = false;
 int planetNumber = 4;
 float speed = 50;
 int state = 1;
 float screenWidth = displayWidth;
 float screenHeight = displayHeight;
+int index = 0;
+int timer = 0;
 
 void draw()
 {
-  //translate(width/2, height/2);
   if(!warped)
   {
     displayStars();
@@ -42,7 +44,13 @@ void draw()
     if(!played)
     {
       (planets.get(planetNumber)).playSound();
+      if(changed)
+      {
+        (planets.get(planetNumber)).stopSound();
+        changed = false;
+      }
       played = true;
+      
     }
     if(state == 1)
     {
@@ -56,14 +64,19 @@ void draw()
   }
   else
   {
-    if(state == 1)
+    translate(width/2, height/2);
+    if(timer < 500)
     {
-      menu.displayMenu();
+      for(int i = 0; i < warp.length; i++)
+      {
+        warp[i].drawStar();
+        warp[i].warp();
+      }
     }
-    else if(state == 2)
+    else
     {
-      menu.confirm();
-      state = 0;
+      warped = true;
+      timer = 0;
     }
   }
   outline.render();
@@ -81,11 +94,11 @@ void initialisePlanets()
   AudioPlayer english = minim.loadFile("Sound/earthFunny.mp3");
   PImage stationImg = loadImage("Final_Images/spaceStation2.png");
   AudioPlayer stationAudio = minim.loadFile("Sound/DS9AmbientSounds.mp3");
-  Planet vulcan = new Planet(vulcanImg, vulcanGreeting, "Vulcan");
-  Planet kronos = new Planet(kronosImg, klingon, "Kronos");
-  Planet romulus = new Planet(romulusImg, romulan, "Romulus");
-  Planet earth = new Planet(earthImg, english, "Earth");
-  Planet station = new Planet(stationImg, stationAudio, "Deep Space Nine");
+  Planet vulcan = new Planet(vulcanImg, vulcanGreeting, "Vulcan", 0);
+  Planet kronos = new Planet(kronosImg, klingon, "Kronos", 1);
+  Planet romulus = new Planet(romulusImg, romulan, "Romulus", 2);
+  Planet earth = new Planet(earthImg, english, "Earth", 3);
+  Planet station = new Planet(stationImg, stationAudio, "Deep Space Nine", 4);
   planets.add(vulcan);
   planets.add(kronos);
   planets.add(romulus);
@@ -114,8 +127,35 @@ void displayStars()
 
 void keyPressed()
 {
-    if(key == 'w')
+  if(keyCode == LEFT)
+  {
+    if(index == 0)
     {
-      state = 1;
+      index = 3;
     }
+    else
+    {
+      index--;
+    }
+  }
+  else if(keyCode == RIGHT)
+  {
+    if(index == 3)
+    {
+      index = 0;
+    }
+    else
+    {
+      index++;
+    }
+  }
+  else if(key == 'w')
+  {
+    warped = true;
+  }
+  else if(key == ENTER)
+  {
+    planetNumber = (planets.get(index)).planetIndex;
+    changed = true;
+  }
 }

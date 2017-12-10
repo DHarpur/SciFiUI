@@ -6,7 +6,7 @@ class Menu {
   float buttonHeight;
   float gap;
   float buttonWGap, buttonHGap;
-  int index = 0;
+  
   Menu()
   {
     outlineColor = color(19, 103, 110);
@@ -31,11 +31,17 @@ class Menu {
     for(int i = 0; i < planets.size() - 1; i++)
     {  
        fill(146, 169, 206);
+       if(i == index)
+       {
+         fill(176, 197, 232);
+       }
        rect(x + buttonWGap, y + buttonHGap, buttonWidth, buttonHeight);
        if(planets.get(i) != planets.get(planetNumber))
        {
          fill(0);
-         text(planets.get(i)).toString(), (x+buttonWGap+50), (y+buttonHGap+50));
+         textSize(26);
+         //textAlign(CENTER);
+         text((planets.get(i)).toString(), (x+buttonWGap+60), (y+buttonHGap+100));
        }
        buttonWGap = buttonWGap + gap;
     }
@@ -47,8 +53,5 @@ class Menu {
     
   }
   
-  void keyPressed()
-  {
-    //int keyCode = 
-  }
+  
 }
