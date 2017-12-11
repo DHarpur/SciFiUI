@@ -93,11 +93,11 @@ void draw()
 
 void initialisePlanets()
 {
-  PImage vulcanImg = loadImage("Final_Images/Vulcan3.png");
-  PImage kronosImg = loadImage("Final_Images/kronos2.png");
-  PImage romulusImg = loadImage("Final_Images/romulus2.png");
-  PImage earthImg = loadImage("Final_Images/earth2.png");
-  PImage stationImg = loadImage("Final_Images/spaceStation2.png");
+  PImage vulcanImg = loadImage("images/Vulcan3.png");
+  PImage kronosImg = loadImage("images/kronos2.png");
+  PImage romulusImg = loadImage("images/romulus2.png");
+  PImage earthImg = loadImage("images/earth2.png");
+  PImage stationImg = loadImage("images/spaceStation2.png");
   
   Planet vulcan = new Planet(vulcanImg, "Vulcan", 0);
   Planet kronos = new Planet(kronosImg, "Kronos", 1);
@@ -113,11 +113,11 @@ void initialisePlanets()
 }
 void initialiseSounds()
 {
-  Sound vulcanGreeting = new Sound("Sound/spock07.mp3");
-  Sound romulan = new Sound("Sound/Romulan.mp3");
-  Sound english = new Sound("Sound/earthFunny.mp3");
-  Sound stationAudio = new Sound("Sound/DS9AmbientSounds.mp3");
-  Sound klingon = new Sound("Sound/identify.wav");
+  Sound vulcanGreeting = new Sound("sound/spock07.mp3");
+  Sound romulan = new Sound("sound/Romulan.mp3");
+  Sound english = new Sound("sound/earthFunny.mp3");
+  Sound stationAudio = new Sound("sound/DS9AmbientSounds.mp3");
+  Sound klingon = new Sound("sound/identify.wav");
   
   sounds.add(vulcanGreeting);
   sounds.add(klingon);
