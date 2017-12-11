@@ -11,6 +11,7 @@ class Sound
   {
     sound.rewind();
     sound.play();
+    played = true;
   }
   
   void stopPlayback()

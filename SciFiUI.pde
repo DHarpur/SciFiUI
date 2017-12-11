@@ -48,7 +48,6 @@ void draw()
     if(!played)
     {
       (sounds.get(planetNumber)).playSound();
-      played = true;
     }
     if(state == 1 && !confirmed)
     {
@@ -64,6 +63,7 @@ void draw()
     fill(0,80);
     rect(2,2, width, height);
     translate(width/2, height/2);
+    played = false;
     if(timer < 200)
     {
       for(int i = 0; i < warp.length; i++)
@@ -80,7 +80,6 @@ void draw()
       state = 0;
       confirmed = false;
       played = false;
-      changed = true;
     }
     translate(-(width/2), -(height/2));
   }
@@ -95,13 +94,9 @@ void draw()
 void initialisePlanets()
 {
   PImage vulcanImg = loadImage("Final_Images/Vulcan3.png");
-  
   PImage kronosImg = loadImage("Final_Images/kronos2.png");
-  
   PImage romulusImg = loadImage("Final_Images/romulus2.png");
- 
   PImage earthImg = loadImage("Final_Images/earth2.png");
- 
   PImage stationImg = loadImage("Final_Images/spaceStation2.png");
   
   Planet vulcan = new Planet(vulcanImg, "Vulcan", 0);
@@ -109,6 +104,7 @@ void initialisePlanets()
   Planet romulus = new Planet(romulusImg, "Romulus", 2);
   Planet earth = new Planet(earthImg, "Earth", 3);
   Planet station = new Planet(stationImg, "Deep Space Nine", 4);
+  
   planets.add(vulcan);
   planets.add(kronos);
   planets.add(romulus);

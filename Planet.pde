@@ -20,7 +20,7 @@ class Planet
     image(planet, 0, 0);
   }
   
-  String toString()
+  String toName()
   {
     return name;
   }
