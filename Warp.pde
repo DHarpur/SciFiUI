@@ -4,7 +4,7 @@ class Warp
   float x, y, z;
   float pz;
   float speed;
-  boolean warped = false;
+  boolean warping = false;
   Warp(float speed)
   {
     x = random(0, width);
@@ -20,16 +20,13 @@ class Warp
     pushMatrix();
     stroke(rectColor);
     strokeWeight(5);
-    fill(0, 30);
-    rect(1, 1, width-1, height-1);
-
     strokeWeight(1);
     fill(255);
     noStroke();
     float sx = map(x / z, 0, 1, 0, width/2);
     float sy = map(y / z, 0, 1, 0, height/2);
     float r = map(z, 0, width/2, 16, 0);
-    if(!warped)
+    if(!warping)
     {
       ellipse(sx, sy, r, r);
     }
@@ -49,7 +46,12 @@ class Warp
       x = random(-width/2, width/2);
       y = random(-height/2, height/2);
       pz = z;
-      warped = true;
     }
+    warping = true;
+  }
+  
+  void endWarp()
+  {
+    
   }
 }

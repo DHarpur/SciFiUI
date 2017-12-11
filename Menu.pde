@@ -6,6 +6,7 @@ class Menu {
   float buttonHeight;
   float gap;
   float buttonWGap, buttonHGap;
+  String[] yesno = {"Yes", "No"};
   
   Menu()
   {
@@ -23,11 +24,11 @@ class Menu {
   
   void displayMenu()
   {
-    //pushMatrix();
+    pushMatrix();
     stroke(outlineColor);
     fill(0,10);
     rect(x, y, x2, y2);
-    
+    gap = 240;
     for(int i = 0; i < planets.size() - 1; i++)
     {  
        fill(146, 169, 206);
@@ -38,7 +39,7 @@ class Menu {
        rect(x + buttonWGap, y + buttonHGap, buttonWidth, buttonHeight);
        if(planets.get(i) != planets.get(planetNumber))
        {
-         fill(0);
+         fill(255);
          textSize(26);
          //textAlign(CENTER);
          text((planets.get(i)).toString(), (x+buttonWGap+60), (y+buttonHGap+100));
@@ -46,12 +47,48 @@ class Menu {
        buttonWGap = buttonWGap + gap;
     }
     buttonWGap = 40;
-    //popMatrix();
+    popMatrix();
   }
   
-  void confirm(){
-    
+  void confirm()
+  {
+    pushMatrix();
+    planetTemp = planets.get(index).planetIndex;
+    stroke(outlineColor);
+    fill(0,10);
+    rect(x, y, x2, y2);
+    fill(255);
+    text("Do you wish to Warp to " + planets.get(planetTemp).toString() + "?", x+buttonWGap+200, y+50);
+    gap = 540;
+    for(int i = 0; i < 2; i++)
+    {
+      fill(146, 169, 206);
+      if(i == indexC)
+      {
+        fill(176, 197, 232);
+      }
+      rect(x+buttonWGap, y+buttonHGap+25,buttonWidth+buttonWidth, buttonHeight-25);
+      fill(255);
+      textSize(26);
+      text(yesno[i], (x+buttonWGap+160), y+buttonHGap+125);
+      buttonWGap = buttonWGap + gap;
+    }
+    buttonWGap = 40;
+    popMatrix();
   }
   
+  void changePlanet()
+  {
+    if(yesno[indexC].equals("Yes"))
+    {
+      planetNumber = planetTemp;
+      warped=true;
+    }
+    else
+    {
+      state = 0;
+      confirmed = false;
+    }
+  }
   
 }
