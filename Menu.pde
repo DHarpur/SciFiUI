@@ -118,7 +118,7 @@ class Menu {
     {
       planetNumber = planetTemp;
       warped=true;
-      changed = true;
+      changed = false;
     }
     else
     {

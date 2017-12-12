@@ -93,6 +93,11 @@ void draw()
     if(!played)
     {
       (sounds.get(planetNumber)).playSound();
+      /*if(!changed)
+      {
+        (sounds.get(planetNumber)).stopPlayback();
+        changed = true;
+      }*/
     }
     if(state == 1 && !confirmed)
     {
@@ -102,6 +107,7 @@ void draw()
     {
       menu.confirm();
     }
+    
   }
   else
   {
@@ -128,11 +134,7 @@ void draw()
     }
     translate(-(width/2), -(height/2));
   }
-  if(changed)
-  {
-    (sounds.get(planetNumber)).stopPlayback();
-    changed = false;
-  }
+  
   outline.render();
 }
 
