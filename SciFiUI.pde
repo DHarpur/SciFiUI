@@ -30,7 +30,6 @@ boolean warped = false;
 boolean changed = false;
 boolean confirmed = false;
 int planetNumber = 0;
-int planetTemp;
 float speed = 50;
 int state = 0;
 float screenWidth = displayWidth;
@@ -38,6 +37,52 @@ float screenHeight = displayHeight;
 int index = 0;
 int indexC = 0;
 int timer = 0;
+int selectedPlanet;
+
+void initialisePlanets()
+{
+  PImage vulcanImg = loadImage("images/Vulcan3.png");
+  PImage kronosImg = loadImage("images/kronos2.png");
+  PImage romulusImg = loadImage("images/romulus2.png");
+  PImage earthImg = loadImage("images/earth2.png");
+  PImage stationImg = loadImage("images/spaceStation2.png");
+  
+  Planet vulcan = new Planet(vulcanImg, "Vulcan", 0);
+  Planet kronos = new Planet(kronosImg, "Kronos", 1);
+  Planet romulus = new Planet(romulusImg, "Romulus", 2);
+  Planet earth = new Planet(earthImg, "Earth", 3);
+  Planet station = new Planet(stationImg, "Deep Space Nine", 4);
+  
+  planets.add(vulcan);
+  planets.add(kronos);
+  planets.add(romulus);
+  planets.add(earth);
+  planets.add(station);
+}
+
+void initialiseSounds()
+{
+  Sound vulcanGreeting = new Sound("sound/spock07.mp3");
+  Sound romulan = new Sound("sound/Romulan.mp3");
+  Sound english = new Sound("sound/earthFunny.mp3");
+  Sound stationAudio = new Sound("sound/DS9AmbientSounds.mp3");
+  Sound klingon = new Sound("sound/identify.wav");
+  
+  sounds.add(vulcanGreeting);
+  sounds.add(klingon);
+  sounds.add(romulan);
+  sounds.add(english);
+  sounds.add(stationAudio);
+}
+
+void setupWarpStars()
+{
+  for(int i = 0; i < warp.length; i++)
+  {
+    warp[i] = new Warp(speed);
+  }
+}
+
 
 void draw()
 {
@@ -89,49 +134,6 @@ void draw()
     changed = false;
   }
   outline.render();
-}
-
-void initialisePlanets()
-{
-  PImage vulcanImg = loadImage("images/Vulcan3.png");
-  PImage kronosImg = loadImage("images/kronos2.png");
-  PImage romulusImg = loadImage("images/romulus2.png");
-  PImage earthImg = loadImage("images/earth2.png");
-  PImage stationImg = loadImage("images/spaceStation2.png");
-  
-  Planet vulcan = new Planet(vulcanImg, "Vulcan", 0);
-  Planet kronos = new Planet(kronosImg, "Kronos", 1);
-  Planet romulus = new Planet(romulusImg, "Romulus", 2);
-  Planet earth = new Planet(earthImg, "Earth", 3);
-  Planet station = new Planet(stationImg, "Deep Space Nine", 4);
-  
-  planets.add(vulcan);
-  planets.add(kronos);
-  planets.add(romulus);
-  planets.add(earth);
-  planets.add(station);
-}
-void initialiseSounds()
-{
-  Sound vulcanGreeting = new Sound("sound/spock07.mp3");
-  Sound romulan = new Sound("sound/Romulan.mp3");
-  Sound english = new Sound("sound/earthFunny.mp3");
-  Sound stationAudio = new Sound("sound/DS9AmbientSounds.mp3");
-  Sound klingon = new Sound("sound/identify.wav");
-  
-  sounds.add(vulcanGreeting);
-  sounds.add(klingon);
-  sounds.add(romulan);
-  sounds.add(english);
-  sounds.add(stationAudio);
-}
-
-void setupWarpStars()
-{
-  for(int i = 0; i < warp.length; i++)
-  {
-    warp[i] = new Warp(speed);
-  }
 }
 
 void displayStars()
@@ -210,6 +212,7 @@ void keyPressed()
     else
     {
       menu.changePlanet();
+      selectedPlanet = index;
     }
   }
 }
