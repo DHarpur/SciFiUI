@@ -5,7 +5,7 @@
 
   -> 'W' key to bring up the warp menu.
   
-  -> Left and right arrow keys to naviggate the menu.
+  -> Left and right arrow keys to navigate the menu.
   
   -> Enter key to select each option on the menu.
 
