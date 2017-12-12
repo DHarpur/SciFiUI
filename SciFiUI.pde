@@ -5,6 +5,7 @@ import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
+//Creating objects
 Outline outline = new Outline();
 ArrayList<Planet> planets = new ArrayList<Planet>();
 ArrayList<Sound> sounds = new ArrayList<Sound>();
@@ -12,6 +13,8 @@ Menu menu = new Menu();
 Warp[] warp = new Warp[400];
 Minim minim;
 
+
+//Initialising the planets, sounds and other objects.
 void setup()
 {
   minim = new Minim(this);
@@ -22,25 +25,21 @@ void setup()
   initialisePlanets();
   initialiseSounds();
   setupWarpStars();
-  frameRate(120);
 }
 
-
+//Various global variables used for audio control and such
 boolean played = false;
 boolean warped = false;
-boolean changed = false;
 boolean confirmed = false;
 boolean backgroundSound = false;
 int planetNumber = 4;
 float speed = 50;
 int state = 0;
-float screenWidth = displayWidth;
-float screenHeight = displayHeight;
 int index = 0;
 int indexC = 0;
 int timer = 0;
-int selectedPlanet;
 
+//Initailising each of the planets from memory 
 void initialisePlanets()
 {
   PImage vulcanImg = loadImage("images/Vulcan3.png");
@@ -62,6 +61,7 @@ void initialisePlanets()
   planets.add(station);
 }
 
+//Initialising the sounds for each planet from memory
 void initialiseSounds()
 {
   Sound vulcanGreeting = new Sound("sound/spock07.mp3");
@@ -77,6 +77,7 @@ void initialiseSounds()
   sounds.add(stationAudio);
 }
 
+//Setting up the stars to be used in the warping
 void setupWarpStars()
 {
   for(int i = 0; i < warp.length; i++)
@@ -85,7 +86,7 @@ void setupWarpStars()
   }
 }
 
-
+//Drawing to the screen
 void draw()
 {
   if(!backgroundSound)
@@ -147,6 +148,7 @@ void draw()
   outline.render();
 }
 
+//Displaying the stars flickering in the background
 void displayStars()
 {
   color rectColor = color(19, 103, 110);
@@ -158,6 +160,8 @@ void displayStars()
   ellipse(random(0, width), random(0, height), 3, 3); 
 }
 
+
+//Implementing the user interface
 void keyPressed()
 {
   if(keyCode == LEFT)
@@ -223,7 +227,6 @@ void keyPressed()
     else
     {
       menu.changePlanet();
-      selectedPlanet = index;
     }
   }
 }

@@ -25,6 +25,8 @@ class Outline
     vertex(x, y + (height - (height/4)));
     vertex(x,y);
     endShape();
+    noFill();
+    rect(1, 1, width-2, height-2);
     popMatrix();
   }
 }
