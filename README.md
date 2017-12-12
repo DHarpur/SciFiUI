@@ -17,4 +17,4 @@
 ### Youtube Video
   <a href="http://www.youtube.com/watch?feature=player_embedded&v=LnzJgPKwKbM
 " target="_blank"><img src="http://img.youtube.com/vi/LnzJgPKwKbM/0.jpg" 
-alt="SciFiUI" width="240" height="180" border="10" /></a>
+alt="SciFiUI" width="480" height="360" border="10" /></a>
