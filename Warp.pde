@@ -49,9 +49,4 @@ class Warp
     }
     warping = true;
   }
-  
-  void endWarp()
-  {
-    
-  }
 }

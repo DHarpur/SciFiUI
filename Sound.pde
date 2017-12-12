@@ -14,6 +14,20 @@ class Sound
     played = true;
   }
   
+  void lowerVolume()
+  {
+    sound.setGain(-20);
+  }
+  
+  boolean isPlaying()
+  {
+    if(sound.isPlaying())
+    {
+      return true;
+    }
+    return false;
+  }
+  
   void stopPlayback()
   {
     if(sound.isPlaying())

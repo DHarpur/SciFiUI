@@ -42,7 +42,7 @@ class Menu {
     fill(0,10);
     rect(x, y, x2, y2);
     fill(255);
-    text("Warp Destination:", x+buttonWGap+200, y+50);
+    text("Warp Destination:", x+buttonWGap+350, y+50);
     gap = 240;
     Planet currentPlanet = planets.get(planetNumber);
     int count = 0;

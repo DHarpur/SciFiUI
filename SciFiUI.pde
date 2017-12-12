@@ -17,6 +17,7 @@ void setup()
   minim = new Minim(this);
   fullScreen();
   background(0);
+  noCursor();
   smooth();
   initialisePlanets();
   initialiseSounds();
@@ -29,7 +30,8 @@ boolean played = false;
 boolean warped = false;
 boolean changed = false;
 boolean confirmed = false;
-int planetNumber = 0;
+boolean backgroundSound = false;
+int planetNumber = 4;
 float speed = 50;
 int state = 0;
 float screenWidth = displayWidth;
@@ -51,7 +53,7 @@ void initialisePlanets()
   Planet kronos = new Planet(kronosImg, "Kronos", 1);
   Planet romulus = new Planet(romulusImg, "Romulus", 2);
   Planet earth = new Planet(earthImg, "Earth", 3);
-  Planet station = new Planet(stationImg, "Deep Space Nine", 4);
+  Planet station = new Planet(stationImg, "Deep Space \nNine", 4);
   
   planets.add(vulcan);
   planets.add(kronos);
@@ -86,6 +88,12 @@ void setupWarpStars()
 
 void draw()
 {
+  if(!backgroundSound)
+  {
+    sounds.get(4).lowerVolume();
+    sounds.get(4).playSound();
+    backgroundSound = true;
+  }
   if(!warped)
   {
     displayStars();
@@ -93,11 +101,12 @@ void draw()
     if(!played)
     {
       (sounds.get(planetNumber)).playSound();
-      /*if(!changed)
+      if((sounds.get(planetNumber).isPlaying()))
       {
-        (sounds.get(planetNumber)).stopPlayback();
-        changed = true;
-      }*/
+        sounds.get(4).stopPlayback();
+        backgroundSound = false;
+      }
+      played = true;
     }
     if(state == 1 && !confirmed)
     {
