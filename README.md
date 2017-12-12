@@ -11,7 +11,7 @@
 
 ### The Interface
   
-  In this assignemnt I decided to create a Star Trek inspired user interface which allowed the user to 'warp' to different locations. Eg. Vulcan or Romulus. Once the user successfully selects a planet to 'warp' to, a warp animation is immplemented. When the animation is complete and the user has arrived at their next destination, an audio clip related to that specific planet is played. It is the implementation of the audio that I am most proud of.
+  In this assignment I decided to create a Star Trek inspired user interface which allowed the user to 'warp' to different locations. Eg. Vulcan or Romulus. Once the user successfully selects a planet to 'warp' to, a warp animation is immplemented. When the animation is complete and the user has arrived at their next destination, an audio clip related to that specific planet is played. It is the implementation of the audio that I am most proud of.
   
  
 ### Youtube Video
